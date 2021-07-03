@@ -1,0 +1,5 @@
+{ 
+    "watch": ["bin", "public", "views"],
+    "exec": "yarn build:js; yarn start" ,
+    "ext": "ts, handlebars, hbs, html, js"
+}

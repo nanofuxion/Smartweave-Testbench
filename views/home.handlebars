@@ -1,0 +1,74 @@
+<div class="mx-auto container py-4 h-screen bg-gray-700 rounded-lg">
+    <div class="grid rounded-lg px-2 grid-cols-3 grid-rows-7 gap-4 h-full">
+        <div class="grid rounded-lg col-span-3 row-span-1 text-center bg-purple-600">
+            <h1 class="mx-auto my-auto text-4xl text-white">Smartweave Testbench</h1>
+            <h3 class="mx-auto my-auto text-white">If this you find this project useful please consider making a donation to AR wallet: <br>
+            a5_du7BfZ3aCqAjVYWROr1uFogvX1O5oN-rMTV3GB1I</h3>
+        </div>
+        <div class="grid rounded-lg p-2 col-span-1 row-span-4 bg-purple-600">{{!-- drop --}}
+            <h3 class="mx-auto my-auto text-4xl text-white p-1">Contact:</h3>
+            <div class="h-8 w-full bg-blue-200 rounded-lg relative overflow-hidden">
+                <div id="progressBar" class="h-8 bg-blue-500 opacity relative" style="width: 0%;"></div>
+            </div>
+            <div class="border border-dashed border-gray-500 bg-purple-300 rounded-lg relative -mt-24 mb-auto">
+                <form enctype="multipart/form-data">
+                    <input name="file" type="file" multiple id="fileInput" class="cursor-pointer relative block opacity-0 w-full h-full bottom-0px-20 py-32 z-50">
+                </form>
+                <div class="text-center p-10 absolute top-0 right-0 left-0 m-auto">
+                    <h4>
+                        Drop files here to upload
+                        <br />or
+                    </h4>
+                    <p class="">Select Files</p>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="grid rounded-lg p-2 col-span-2 row-span-3 bg-purple-600 min-h-full h-48">{{!-- wallet --}}
+            <h3 class="mx-auto text-xl text-white">Wallet Addresses:</h3>
+            <ul class="overflow-auto">
+                {{#each wallets}}
+                <button class="rounded bg-purple-300 p-1 my-2 w-full wallet-btn">ID: {{id}}
+                </button>
+                {{/each}}
+            </ul>
+        </div> -->
+        <div class="grid rounded-lg p-2 col-span-2 row-span-1 text-white bg-purple-600">
+            <h3 class="mx-auto text-4xl p-1">Inputs:</h3>
+            <form class="grid grid-cols-2 grid-rows-2 gap-2">
+                <label class="block col-span-1 row-span-1">
+                    Caller ID:
+                    <input class="block border-2 border-purple-800 rounded bg-purple-300 p-1 w-full" list="wallets" id="caller">
+                            <datalist id="wallets">
+                                {{#each wallets}}
+                                <option value="{{id}}">
+                                {{/each}}
+                            </datalist>
+                    </imput>
+                    </label>
+                <label class="block col-span-1 row-span-1">
+                    Contract TXID:
+                    <input class="block border-2 border-purple-800 rounded bg-purple-300 p-1 w-full" list="txid" id="conid">
+                            <datalist id="txid">
+                                {{#each tx as |id|}}
+                                <option value="{{id.[1]}}">{{id.[0]}}</option>
+                                {{/each}}
+                            </datalist>
+                    </imput>
+                    </label>
+                <label class="block col-span-2 row-span-1">
+                    Action.input:
+                    <input class="block border-2 border-purple-800 rounded bg-purple-300 p-1 w-full" id="json"></imput>
+                </label>
+                <input type="submit" class="hidden" id="form"/>
+            </form>
+        </div>
+        <div class="grid rounded-lg px-2 pb-2 col-span-2 row-span-3 bg-purple-600">{{!-- logs --}}
+            <h3 class="mx-auto text-4xl text-white p-1">Logs:</h3>
+            <ul class="overflow-auto rounded-lg h-72" id="logs">                                
+                {{#each log as |_log|}}
+                <li class="border-b-2 border-purple-800 rounded-b bg-purple-300 p-1">{{{_log}}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>

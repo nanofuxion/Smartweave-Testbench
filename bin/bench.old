@@ -1,0 +1,69 @@
+import { handle } from '../contracts/token'
+import inquirer  from 'inquirer'
+/* @ts-ignore */
+import * as state from '../contracts/token.json'
+/* @ts-ignore */
+import * as prompt from 'prompt';
+
+let ContractError = console.error
+
+let myArgs: string[] = process.argv.slice(2);
+let current: any = state;
+current = current["default"];
+
+let action: any = {
+    input: {
+        qty: 0.0,
+        target: "",
+        function: ""
+    },
+    caller: ""
+};
+
+['function:', 'wallet', 'target','amount']
+var schema = {
+    properties: {
+        function: {
+            pattern: /^[a-zA-Z\s\-]+$/,
+            message: 'Please specify an action',
+            required: true
+        },
+        caller: {
+            message: 'Wallet address to send from?',
+            required: true
+        },
+        target: {
+            message: 'Send to?',
+            required: true
+        },
+        quantity: {
+            message: 'Quantity to send?',
+            required: true
+        },
+    }
+  };
+
+prompt.start();
+let transaction = () => {
+    prompt.get(schema, function (err: any, result: any) {
+        //
+        // Log the results.
+        //
+        // console.log('Command-line input received:');
+        action.input.function = result.function;
+        action.caller = result.caller;
+        action.input.target = result.target;
+        action.input.qty = parseFloat(result.quantity);
+        console.log(JSON.stringify(action, null, 2))
+
+        handle(current, action)
+        console.log(JSON.stringify(current, null, 2))
+        transaction()
+    });
+}
+transaction();
+
+
+// handle(current, action)
+
+
